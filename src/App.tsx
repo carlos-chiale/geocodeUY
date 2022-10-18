@@ -5,6 +5,8 @@ import {
   LayersControl,
   Marker,
   useMap,
+  useMapEvents,
+  Popup,
 } from "react-leaflet";
 import {
   AutoComplete,
@@ -21,7 +23,12 @@ import "antd/dist/antd.css";
 import L from "leaflet";
 import Title from "antd/lib/typography/Title";
 
-const icon = L.icon({ iconUrl: "/images/marker-icon.png" });
+const icon = L.icon({
+  iconUrl: "/images/marker-icon.png",
+  iconSize: [25, 41],
+  iconAnchor: [10, 41],
+  popupAnchor: [2, -40],
+});
 
 const { BaseLayer } = LayersControl;
 
@@ -35,6 +42,18 @@ function SetView(props: any) {
   return null;
 }
 
+const MapEvents = (props: any) => {
+  useMapEvents({
+    click(e) {
+      // setState your coords here
+      // coords exist in "e.latlng.lat" and "e.latlng.lng"
+      props.setClickCoordinates([e.latlng.lat, e.latlng.lng]);
+      props.cleanMarker(null);
+    },
+  });
+  return null;
+};
+
 function App() {
   const [options, setOptions] = useState<{ value: string }[]>([]);
   const [direccion, setDireccion] = useState<string>("");
@@ -44,8 +63,51 @@ function App() {
   const [addressOSM, setAddressOSM] = useState<string>("");
   const [marker, setMarker] = useState<any>();
   const [geocoderSelected, setGeocoderSelected] = useState("IDE");
+  const [clickCoordinates, setClickCoordinates] = useState<any>();
+  const [dirFromCoordinatesIDE, setDirFromCoordinatesIDE] = useState<any>();
+  const [dirFromCoordinatesOSM, setDirFromCoordinatesOSM] = useState<any>();
+
+  useEffect(() => {
+    if (clickCoordinates) {
+      findByCoordinatesIDE(clickCoordinates[0], clickCoordinates[1]);
+      findByCoordinatesOSM(clickCoordinates[0], clickCoordinates[1]);
+    }
+  }, clickCoordinates);
 
   const { Header, Footer, Sider, Content } = Layout;
+
+  const findByCoordinatesIDE = async (lat: any, lon: any) => {
+    const response = await fetch(
+      `https://direcciones.ide.uy/api/v1/geocode/reverse?latitud=${lat}&limit=10&longitud=${lon}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    let responseJson = await response.json();
+    setDirFromCoordinatesIDE(
+      `${responseJson[0].address}, ${responseJson[0].localidad}, ${responseJson[0].departamento}`
+    );
+  };
+
+  const findByCoordinatesOSM = async (lat: any, lon: any) => {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    let responseJson = await response.json();
+    console.log(responseJson);
+    setDirFromCoordinatesOSM(
+      `${responseJson.address.road} ${responseJson.address.house_number}, ${responseJson.address.city}, ${responseJson.address.state}`
+    );
+  };
 
   const onSearch = async (searchText: string) => {
     const response = await fetch(
@@ -98,6 +160,7 @@ function App() {
   };
 
   const searchAddressIDE = async () => {
+    setClickCoordinates(null);
     const response = await fetch(
       `https://direcciones.ide.uy/api/v0/geocode/BusquedaDireccion?calle=${direccion}&departamento=${departamento}&localidad=${localidad}`,
       {
@@ -113,6 +176,7 @@ function App() {
   };
 
   const searchAddressOSM = async () => {
+    setClickCoordinates(null);
     const response = await fetch(
       `https://nominatim.openstreetmap.org/search?country=Uruguay&city=${cityOSM}&street=${addressOSM}&format=json`,
       {
@@ -132,12 +196,11 @@ function App() {
   };
 
   const onChangeRadio = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
     setGeocoderSelected(e.target.value);
   };
 
   return (
-    <Layout>
+    <Layout style={{ height: "100vh" }}>
       <Header>
         <Title style={{ color: "white" }}>
           Prueba de Geocodificadores Uruguay
@@ -220,8 +283,25 @@ function App() {
             center={[-34.901112, -56.164532]}
             zoom={13}
             scrollWheelZoom={true}
-            style={{ height: "650px" }}
+            style={{ height: "100%" }}
           >
+            <MapEvents
+              setClickCoordinates={setClickCoordinates}
+              cleanMarker={setMarker}
+            />
+            {clickCoordinates && (
+              <Marker position={clickCoordinates} icon={icon}>
+                <Popup>
+                  <b>IDE:</b>
+                  <br />
+                  {dirFromCoordinatesIDE}
+                  <br />
+                  <b>OSM:</b>
+                  <br />
+                  {dirFromCoordinatesOSM}
+                </Popup>
+              </Marker>
+            )}
             {existsMarker() && (
               <>
                 <Marker position={marker} icon={icon} />{" "}
