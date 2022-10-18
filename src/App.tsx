@@ -45,8 +45,6 @@ function SetView(props: any) {
 const MapEvents = (props: any) => {
   useMapEvents({
     click(e) {
-      // setState your coords here
-      // coords exist in "e.latlng.lat" and "e.latlng.lng"
       props.setClickCoordinates([e.latlng.lat, e.latlng.lng]);
       props.cleanMarker(null);
     },
@@ -200,8 +198,8 @@ function App() {
   };
 
   return (
-    <Layout style={{ height: "100vh" }}>
-      <Header>
+    <Layout>
+      <Header style={{ height: "8vh" }}>
         <Title style={{ color: "white" }}>
           Prueba de Geocodificadores Uruguay
         </Title>
@@ -278,7 +276,7 @@ function App() {
             )}
           </Row>
         </Sider>
-        <Content>
+        <Content style={{ height: "92vh" }}>
           <MapContainer
             center={[-34.901112, -56.164532]}
             zoom={13}
