@@ -1,3 +1,4 @@
 /// <reference types="node" />
 
-declare module "leaflet.wms";
+declare module "leaflet.wms"
+
