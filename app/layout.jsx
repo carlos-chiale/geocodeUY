@@ -2,6 +2,7 @@ import "./globals.css"
 import { Analytics } from '@vercel/analytics/react';
 import { GithubOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import { ThemeToggle } from './components/ThemeToggle';
 
 export const metadata = {
   title: "Geocodificadores Uruguay",
@@ -10,14 +11,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
-      <body>
+    <html lang="es" suppressHydrationWarning>
+      <body className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
         <div style={{ 
           position: 'fixed', 
           top: '20px', 
           right: '20px', 
-          zIndex: 1000 
+          zIndex: 1000,
+          display: 'flex',
+          gap: '10px'
         }}>
+          <ThemeToggle />
           <Button 
             type="primary"
             icon={<GithubOutlined />}
