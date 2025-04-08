@@ -142,8 +142,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-blue-600 text-white p-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <header className="bg-blue-600 dark:bg-blue-800 text-white p-4">
         <h1 className="text-2xl font-bold max-w-7xl mx-auto">Geocodificadores Uruguay</h1>
       </header>
 
@@ -151,17 +151,17 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-              <h2 className="text-xl font-semibold mb-4">Buscar dirección</h2>
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
+              <h2 className="text-xl font-semibold mb-4 dark:text-white">Buscar dirección</h2>
 
               {/* Tabs */}
               <div className="mb-6">
-                <div className="flex border-b">
+                <div className="flex border-b dark:border-gray-700">
                   <button
                     className={`py-2 px-4 font-medium ${
                       activeTab === "ide"
-                        ? "border-b-2 border-blue-500 text-blue-600"
-                        : "text-gray-500 hover:text-gray-700"
+                        ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                        : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     }`}
                     onClick={() => setActiveTab("ide")}
                   >
@@ -170,8 +170,8 @@ export default function Home() {
                   <button
                     className={`py-2 px-4 font-medium ${
                       activeTab === "osm"
-                        ? "border-b-2 border-blue-500 text-blue-600"
-                        : "text-gray-500 hover:text-gray-700"
+                        ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
+                        : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     }`}
                     onClick={() => setActiveTab("osm")}
                   >
@@ -184,13 +184,13 @@ export default function Home() {
               {activeTab === "ide" && (
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="direccion" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="direccion" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Dirección
                     </label>
                     <input
                       type="text"
                       id="direccion"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       placeholder="Ingrese dirección"
                       value={direccion}
                       onChange={(e) => setDireccion(e.target.value)}
@@ -198,13 +198,13 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label htmlFor="localidad" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="localidad" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Localidad
                     </label>
                     <input
                       type="text"
                       id="localidad"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       placeholder="Ingrese localidad"
                       value={localidad}
                       onChange={(e) => setLocalidad(e.target.value)}
@@ -212,13 +212,13 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label htmlFor="departamento" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="departamento" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Departamento
                     </label>
                     <input
                       type="text"
                       id="departamento"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       placeholder="Ingrese departamento"
                       value={departamento}
                       onChange={(e) => setDepartamento(e.target.value)}
@@ -226,7 +226,7 @@ export default function Home() {
                   </div>
 
                   <button
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-300"
+                    className="w-full bg-blue-600 dark:bg-blue-700 text-white py-2 px-4 rounded-md hover:bg-blue-700 dark:hover:bg-blue-800 disabled:bg-blue-300 dark:disabled:bg-blue-900"
                     onClick={searchAddressIDE}
                     disabled={loading}
                   >
@@ -239,13 +239,13 @@ export default function Home() {
               {activeTab === "osm" && (
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="addressOSM" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="addressOSM" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Dirección
                     </label>
                     <input
                       type="text"
                       id="addressOSM"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       placeholder="Ingrese dirección"
                       value={addressOSM}
                       onChange={(e) => setAddressOSM(e.target.value)}
@@ -253,13 +253,13 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label htmlFor="cityOSM" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="cityOSM" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Ciudad
                     </label>
                     <input
                       type="text"
                       id="cityOSM"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       placeholder="Ingrese ciudad"
                       value={cityOSM}
                       onChange={(e) => setCityOSM(e.target.value)}
@@ -267,7 +267,7 @@ export default function Home() {
                   </div>
 
                   <button
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-300"
+                    className="w-full bg-blue-600 dark:bg-blue-700 text-white py-2 px-4 rounded-md hover:bg-blue-700 dark:hover:bg-blue-800 disabled:bg-blue-300 dark:disabled:bg-blue-900"
                     onClick={searchAddressOSM}
                     disabled={loading}
                   >
@@ -276,47 +276,52 @@ export default function Home() {
                 </div>
               )}
 
-              {error && <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md">{error}</div>}
+              {error && (
+                <div className="mt-4 p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded-md">
+                  {error}
+                </div>
+              )}
             </div>
 
             {/* Results */}
-            {clickCoordinates && (
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-xl font-semibold mb-4">Dirección encontrada</h2>
-
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-medium mb-1">IDE Uruguay:</h3>
-                    <div className="p-2 bg-gray-100 rounded-md text-sm">
-                      {loading ? "Cargando..." : dirFromCoordinatesIDE || "No disponible"}
-                    </div>
+            {(marker || clickCoordinates) && (
+              <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <h2 className="text-xl font-semibold mb-4 dark:text-white">Resultados</h2>
+                {clickCoordinates && (
+                  <div className="mb-4">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Coordenadas seleccionadas:</h3>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Latitud: {clickCoordinates[0].toFixed(6)}
+                      <br />
+                      Longitud: {clickCoordinates[1].toFixed(6)}
+                    </p>
                   </div>
-
-                  <div>
-                    <h3 className="font-medium mb-1">OpenStreetMap:</h3>
-                    <div className="p-2 bg-gray-100 rounded-md text-sm">
-                      {loading ? "Cargando..." : dirFromCoordinatesOSM || "No disponible"}
-                    </div>
+                )}
+                {dirFromCoordinatesIDE && (
+                  <div className="mb-4">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Dirección IDE:</h3>
+                    <p className="text-gray-600 dark:text-gray-300">{dirFromCoordinatesIDE}</p>
                   </div>
-
+                )}
+                {dirFromCoordinatesOSM && (
                   <div>
-                    <h3 className="font-medium mb-1">Coordenadas:</h3>
-                    <div className="p-2 bg-gray-100 rounded-md text-sm">
-                      Lat: {clickCoordinates[0].toFixed(6)}, Lon: {clickCoordinates[1].toFixed(6)}
-                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Dirección OSM:</h3>
+                    <p className="text-gray-600 dark:text-gray-300">{dirFromCoordinatesOSM}</p>
                   </div>
-                </div>
+                )}
               </div>
             )}
-
-            <div className="mt-4 text-center text-sm text-gray-500">
-              Haga clic en el mapa para obtener la dirección de ese punto
-            </div>
           </div>
 
           {/* Map */}
-          <div className="lg:col-span-2 h-[calc(100vh-12rem)] bg-gray-100 rounded-lg overflow-hidden border border-gray-200 shadow-md">
-            <SimpleMap marker={marker} clickCoordinates={clickCoordinates} onMapClick={handleMapClick} />
+          <div className="lg:col-span-2">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md h-[600px]">
+              <SimpleMap
+                marker={marker}
+                clickCoordinates={clickCoordinates}
+                onMapClick={handleMapClick}
+              />
+            </div>
           </div>
         </div>
       </main>
