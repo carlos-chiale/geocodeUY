@@ -3,7 +3,7 @@
 import { useState } from "react"
 import dynamic from "next/dynamic"
 
-const SimpleMap = dynamic(() => import("../components/simple-map"), {
+const SimpleMap = dynamic(() => import("./components/map/SimpleMap"), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-md">
@@ -262,19 +262,17 @@ export default function Home() {
               )}
             </div>
 
-            {(marker || clickCoordinates) && (
+            {clickCoordinates && (
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                 <h2 className="text-xl font-semibold mb-4 dark:text-white">Resultados</h2>
-                {clickCoordinates && (
-                  <div className="mb-4">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Coordenadas seleccionadas:</h3>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      Latitud: {clickCoordinates[0].toFixed(6)}
-                      <br />
-                      Longitud: {clickCoordinates[1].toFixed(6)}
-                    </p>
-                  </div>
-                )}
+                <div className="mb-4">
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Coordenadas seleccionadas:</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Latitud: {clickCoordinates[0].toFixed(6)}
+                    <br />
+                    Longitud: {clickCoordinates[1].toFixed(6)}
+                  </p>
+                </div>
                 {dirFromCoordinatesIDE && (
                   <div className="mb-4">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Dirección IDE:</h3>

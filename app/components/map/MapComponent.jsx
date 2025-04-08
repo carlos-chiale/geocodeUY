@@ -133,5 +133,4 @@ export default function MapComponent({
       </LayersControl>
     </MapContainer>
   )
-}
-
+} 
