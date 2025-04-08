@@ -1,4 +1,4 @@
-# Geocoding Comparison: Uy vs OpenStreetMap
+# Geocoding Comparison: IDE UY - OpenStreetMap
 
 This project compares geocoding results between [IDE UY](https://direcciones.ide.uy/swagger-ui.html) and OpenStreetMap services.
 
