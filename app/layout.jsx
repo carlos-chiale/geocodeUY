@@ -3,8 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: "Geocodificadores Uruguay",
-  description: "Aplicación para probar geocodificadores en Uruguay",
-    generator: 'v0.dev'
+  description: "Aplicación para probar geocodificadores en Uruguay"
 }
 
 export default function RootLayout({ children }) {
