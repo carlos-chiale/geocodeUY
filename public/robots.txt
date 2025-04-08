@@ -1,4 +1,8 @@
 # https://www.robotstxt.org/robotstxt.html
+# Allow all crawlers
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap location
+Sitemap: https://geocode-uy.chiale.dev/sitemap.xml
 
