@@ -3,7 +3,6 @@
 import { useState } from "react"
 import dynamic from "next/dynamic"
 
-// Dynamically import the Map component with no SSR
 const SimpleMap = dynamic(() => import("../components/simple-map"), {
   ssr: false,
   loading: () => (
@@ -14,37 +13,30 @@ const SimpleMap = dynamic(() => import("../components/simple-map"), {
 })
 
 export default function Home() {
-  // Basic state
   const [activeTab, setActiveTab] = useState("ide")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  // IDE geocoder state
   const [direccion, setDireccion] = useState("")
   const [localidad, setLocalidad] = useState("")
   const [departamento, setDepartamento] = useState("")
 
-  // OSM geocoder state
   const [addressOSM, setAddressOSM] = useState("")
   const [cityOSM, setCityOSM] = useState("")
 
-  // Results state
   const [marker, setMarker] = useState(null)
   const [clickCoordinates, setClickCoordinates] = useState(null)
   const [dirFromCoordinatesIDE, setDirFromCoordinatesIDE] = useState("")
   const [dirFromCoordinatesOSM, setDirFromCoordinatesOSM] = useState("")
 
-  // Handle map click
   const handleMapClick = (coords) => {
     setClickCoordinates(coords)
     setMarker(null)
 
-    // Find addresses by coordinates
     findByCoordinatesIDE(coords[0], coords[1])
     findByCoordinatesOSM(coords[0], coords[1])
   }
 
-  // Function to find address by coordinates using IDE
   const findByCoordinatesIDE = async (lat, lon) => {
     setLoading(true)
     try {
@@ -65,7 +57,6 @@ export default function Home() {
     }
   }
 
-  // Function to find address by coordinates using OSM
   const findByCoordinatesOSM = async (lat, lon) => {
     setLoading(true)
     try {
@@ -87,7 +78,6 @@ export default function Home() {
     }
   }
 
-  // Function to search for address using IDE
   const searchAddressIDE = async () => {
     if (!direccion) return
 
@@ -114,7 +104,6 @@ export default function Home() {
     }
   }
 
-  // Function to search for address using OSM
   const searchAddressOSM = async () => {
     if (!addressOSM || !cityOSM) return
 
@@ -143,36 +132,28 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <header className="bg-blue-600 dark:bg-blue-800 text-white p-4">
-        <h1 className="text-2xl font-bold max-w-7xl mx-auto">Geocodificadores Uruguay</h1>
-      </header>
-
       <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
               <h2 className="text-xl font-semibold mb-4 dark:text-white">Buscar dirección</h2>
 
-              {/* Tabs */}
               <div className="mb-6">
                 <div className="flex border-b dark:border-gray-700">
                   <button
-                    className={`py-2 px-4 font-medium ${
-                      activeTab === "ide"
+                    className={`py-2 px-4 font-medium ${activeTab === "ide"
                         ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
                         : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                    }`}
+                      }`}
                     onClick={() => setActiveTab("ide")}
                   >
                     IDE Uruguay
                   </button>
                   <button
-                    className={`py-2 px-4 font-medium ${
-                      activeTab === "osm"
+                    className={`py-2 px-4 font-medium ${activeTab === "osm"
                         ? "border-b-2 border-blue-500 text-blue-600 dark:text-blue-400"
                         : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                    }`}
+                      }`}
                     onClick={() => setActiveTab("osm")}
                   >
                     OpenStreetMap
@@ -180,7 +161,6 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* IDE Form */}
               {activeTab === "ide" && (
                 <div className="space-y-4">
                   <div>
@@ -235,7 +215,6 @@ export default function Home() {
                 </div>
               )}
 
-              {/* OSM Form */}
               {activeTab === "osm" && (
                 <div className="space-y-4">
                   <div>
@@ -283,7 +262,6 @@ export default function Home() {
               )}
             </div>
 
-            {/* Results */}
             {(marker || clickCoordinates) && (
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
                 <h2 className="text-xl font-semibold mb-4 dark:text-white">Resultados</h2>
@@ -313,7 +291,6 @@ export default function Home() {
             )}
           </div>
 
-          {/* Map */}
           <div className="lg:col-span-2">
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md h-[600px]">
               <SimpleMap
