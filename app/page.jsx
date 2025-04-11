@@ -32,7 +32,6 @@ export default function Home() {
   const handleMapClick = (coords) => {
     setClickCoordinates(coords)
     setMarker(null)
-
     findByCoordinatesIDE(coords[0], coords[1])
     findByCoordinatesOSM(coords[0], coords[1])
   }
