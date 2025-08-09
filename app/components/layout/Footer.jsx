@@ -4,7 +4,7 @@ export function Footer() {
     <footer className="border-t bg-white/70 dark:bg-gray-900/70 backdrop-blur lg:fixed lg:inset-x-0 lg:bottom-0 z-40 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-2 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
         <div className="truncate">
-          <span className="mr-1">Contact:</span>
+          <span className="mr-1">Contacto:</span>
           <a
             href="mailto:carlos@chiale.dev"
             className="hover:underline break-all"
