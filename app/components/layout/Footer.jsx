@@ -1,4 +1,4 @@
-import { GithubOutlined } from '@ant-design/icons';
+import { GithubOutlined } from "@ant-design/icons";
 export function Footer() {
   return (
     <footer className="border-t bg-white/70 dark:bg-gray-900/70 backdrop-blur lg:fixed lg:inset-x-0 lg:bottom-0 z-40 shadow-sm">
@@ -36,5 +36,3 @@ export function Footer() {
     </footer>
   );
 }
-
-
