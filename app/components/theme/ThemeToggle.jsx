@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { Button } from 'antd';
-import { SunOutlined, MoonOutlined } from '@ant-design/icons';
+import { useEffect, useState } from "react";
+import { Button } from "antd";
+import { SunOutlined, MoonOutlined } from "@ant-design/icons";
 
 export function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
@@ -11,21 +11,23 @@ export function ThemeToggle() {
   useEffect(() => {
     setMounted(true);
 
-    const storedTheme = localStorage.getItem('theme');
+    const storedTheme = localStorage.getItem("theme");
 
-    if (storedTheme === 'dark') {
+    if (storedTheme === "dark") {
       setIsDark(true);
-      document.documentElement.classList.add('dark');
-    } else if (storedTheme === 'light') {
+      document.documentElement.classList.add("dark");
+    } else if (storedTheme === "light") {
       setIsDark(false);
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     } else {
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
       setIsDark(systemPrefersDark);
       if (systemPrefersDark) {
-        document.documentElement.classList.add('dark');
+        document.documentElement.classList.add("dark");
       } else {
-        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.remove("dark");
       }
     }
   }, []);
@@ -34,12 +36,12 @@ export function ThemeToggle() {
     const newIsDark = !isDark;
     setIsDark(newIsDark);
 
-    localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
+    localStorage.setItem("theme", newIsDark ? "dark" : "light");
 
     if (newIsDark) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   };
 
@@ -54,19 +56,19 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       className="theme-toggle-btn"
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'inherit',
-        padding: '4px 8px',
-        minWidth: '32px',
-        height: '32px'
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "inherit",
+        padding: "4px 8px",
+        minWidth: "32px",
+        height: "32px",
       }}
-      title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      title={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
     >
       <span className="hidden sm:inline ml-2">
-        {isDark ? 'Light Mode' : 'Dark Mode'}
+        {isDark ? "Modo claro" : "Modo oscuro"}
       </span>
     </Button>
   );
-} 
+}
