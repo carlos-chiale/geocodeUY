@@ -6,7 +6,7 @@ import { ThemeToggle } from "../theme/ThemeToggle";
 
 export function Header() {
   return (
-    <header className="bg-blue-600 dark:bg-blue-800 text-white p-4">
+    <header className="md:sticky md:top-0 z-[2000] bg-blue-600 dark:bg-blue-800 text-white p-4">
       <div className="max-w-7xl mx-auto flex flex-row justify-between items-center">
         <h1 className="text-xl sm:text-2xl font-bold truncate mr-4">
           Geocodificadores Uruguay

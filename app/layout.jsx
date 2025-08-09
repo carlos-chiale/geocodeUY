@@ -100,7 +100,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
         <Header />
-        <main className="flex-1 lg:pb-10">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
         <Analytics />
       </body>
